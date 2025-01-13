@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import MaskedInput from 'react-text-mask';
 import InputForm from './InputForm';
 
-const InputFormRegex = ({ value, label, mask, onChange, placeholder, desiredLength = 1, disabled, required, loading }) => {
+const InputFormRegex = ({ value, label, mask, onChange, placeholder, desiredLength = 1, disabled, required, maxLength, loading }) => {
   const [error, setError] = useState('');
 
   const validate = () => {
@@ -28,6 +28,10 @@ const InputFormRegex = ({ value, label, mask, onChange, placeholder, desiredLeng
         onBlur={validate}
         required={required}
         guide={false}
+        pipe={(conformedValue) => {
+          const maxChars = maxLength;
+          return conformedValue.slice(0, maxChars);
+        }}
       />
       {error && <div className="invalid-feedback">{error}</div>}
     </div>
@@ -44,6 +48,7 @@ const InputFormRegex = ({ value, label, mask, onChange, placeholder, desiredLeng
       disabled={disabled || loading}
       onBlur={validate}
       required={required}
+      maxLength={maxLength}
     />
     {error && <div className="invalid-feedback">{error}</div>}
   </div>

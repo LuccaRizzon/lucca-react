@@ -5,8 +5,8 @@ const InputForm = ({ value, label, mask, onChange, placeholder, desiredLength = 
   const [error, setError] = useState('');
 
   const validate = () => {
-    if (value.replace(/[^0-9]/g, '').length < 11) {
-      setError(`O campo ${label} deve conter pelo menos ${desiredLength} dígitos.`);
+    if (value.replace(/[^0-9]/g, '').length < desiredLength) {
+      setError(`O campo ${label} deve conter pelo menos ${desiredLength} dígitos. e este contém ${value.replace(/[^0-9]/g, '').length}`);
     } else {
       setError('');
     }

@@ -197,6 +197,7 @@ const VeiculoForm = ({ onSuccess }) => {
             value={modelo}
             label="Modelo"
             placeholder="Digite o modelo"
+            maxLength="20"
             onChange={(e) => {
               setModelo(e.target.value);
             }}
@@ -208,6 +209,7 @@ const VeiculoForm = ({ onSuccess }) => {
           <InputFormRegex
             value={marca}
             placeholder="Digite o marca"
+            maxLength="20"
             label="Marca"
             onChange={(e) => {
               setMarca(e.target.value);

@@ -28,7 +28,8 @@ const MotoristaForm = ({ onSuccess }) => {
       nome.length > 0 &&
       cpf.replace(/[^0-9]/g, '').length === 11 &&
       rg.replace(/[^0-9]/g, '').length === 9 &&
-      telefone.replace(/[^0-9]/g, '').length === 11;
+      telefone.replace(/[^0-9]/g, '').length === 11 &&
+      (selectedVeiculo || motoristaId);
 
     setIsFormValid(isValid);
   };
@@ -42,7 +43,7 @@ const MotoristaForm = ({ onSuccess }) => {
 
   useEffect(() => {
     validateForm();
-  }, [nome, cpf, rg, telefone]);
+  }, [nome, cpf, rg, telefone, selectedVeiculo, loading]);
 
   const fetchMotorista = async () => {
     try {
@@ -52,7 +53,7 @@ const MotoristaForm = ({ onSuccess }) => {
       setCpf(cpf || '');
       setRg(rg || '');
       setTelefone(telefone || '');
-      setSelectedVeiculo(veiculo?.id || []);
+      setSelectedVeiculo(veiculo?.id || '');
       setInitialSelectedVeiculo(veiculo?.id || []);
       validateForm();
     } catch (error) {
@@ -157,6 +158,7 @@ const MotoristaForm = ({ onSuccess }) => {
           <input
             id="nome"
             type="text"
+            maxLength="100"
             className="form-control"
             placeholder="Digite o nome"
             value={nome}
