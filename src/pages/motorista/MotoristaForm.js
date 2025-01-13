@@ -16,8 +16,8 @@ const MotoristaForm = ({ onSuccess }) => {
   const [rg, setRg] = useState('');
   const [telefone, setTelefone] = useState('');
   const [veiculos, setVeiculos] = useState([]);
-  const [selectedVeiculo, setSelectedVeiculo] = useState([]);
-  const [initialSelectedVeiculo, setInitialSelectedVeiculo] = useState('');
+  const [selectedVeiculo, setSelectedVeiculo] = useState('');
+  const [initialSelectedVeiculo, setInitialSelectedVeiculo] = useState([]);
   const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
   const [loading, setLoading] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
@@ -28,8 +28,7 @@ const MotoristaForm = ({ onSuccess }) => {
       nome.length > 0 &&
       cpf.replace(/[^0-9]/g, '').length === 11 &&
       rg.replace(/[^0-9]/g, '').length === 9 &&
-      telefone.replace(/[^0-9]/g, '').length === 11 &&
-      (selectedVeiculo || motoristaId);
+      telefone.replace(/[^0-9]/g, '').length === 11;
 
     setIsFormValid(isValid);
   };
@@ -93,7 +92,7 @@ const MotoristaForm = ({ onSuccess }) => {
         cpf,
         rg,
         telefone,
-        ...(selectedVeiculo ? { veiculo: { id: selectedVeiculo } } : {}),
+        ...(selectedVeiculo && selectedVeiculo.length > 0 ? { veiculo: { id: selectedVeiculo } } : {}),
       };
 
       if (motoristaId) {
